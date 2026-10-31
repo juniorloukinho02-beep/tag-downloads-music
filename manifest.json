@@ -1,0 +1,22 @@
+{
+  "short_name": "T.AG Music",
+  "name": "T.AG Downloads Music",
+  "description": "Plataforma de streaming e download de músicas criada por Tiago José Luciano Júnior.",
+  "icons": [
+    {
+      "src": "https://img.icons8.com/color/192/headphones.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://img.icons8.com/color/512/headphones.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#0a0f1d",
+  "theme_color": "#1db954",
+  "display": "standalone",
+  "orientation": "portrait"
+}
