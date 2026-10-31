@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T.AG Downloads Music | Ouça e Baixe Suas Músicas</title>
+    <title>T.AG Downloads Music | Pesquise e Baixe Qualquer Música</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,13 +52,13 @@
                 </div>
                 <div>
                     <span class="text-xl font-black tracking-tight text-white block">T.AG MUSIC</span>
-                    <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Downloads & Streaming</span>
+                    <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Busca & Download Online</span>
                 </div>
             </a>
             
             <div class="flex items-center gap-3">
                 <span class="hidden sm:inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <i class="fa-solid fa-bolt mr-1"></i> Modo App Ativo
+                    <i class="fa-solid fa-globe mr-1"></i> Online Real-Time
                 </span>
             </div>
         </div>
@@ -70,115 +70,44 @@
         <section class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-emerald-950 via-slate-900 to-slate-900 p-8 sm:p-12 border border-emerald-500/20 shadow-2xl">
             <div class="max-w-xl space-y-4 relative z-10">
                 <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 inline-block">
-                    🔥 Lançamentos da Semana
+                    🔍 Pesquisa Global
                 </span>
                 <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white">
-                    Sua Música Favorita, <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Sempre Com Você</span>
+                    Encontre e Baixe <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Qualquer Música</span>
                 </h1>
                 <p class="text-slate-300 text-sm sm:text-base">
-                    Ouça online ou baixe os melhores hits de Kizomba, Afrobeat, Pop e muito mais na <strong>T.AG Downloads Music</strong>.
+                    Digite o nome de qualquer artista, banda ou música na barra abaixo para pesquisar diretamente na internet em tempo real.
                 </p>
             </div>
         </section>
 
-        <!-- Barra de Pesquisa -->
-        <div class="relative">
+        <!-- Barra de Pesquisa Online -->
+        <div class="relative max-w-2xl mx-auto">
             <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
-            <input type="text" id="searchInput" placeholder="Pesquisar música, artista ou estilo..." 
-                class="w-full pl-11 pr-4 py-4 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition shadow-inner">
+            <input type="text" id="searchInput" placeholder="Digite o nome da música ou artista (ex: Kizomba, Burna Boy, Cleyton)..." 
+                class="w-full pl-12 pr-28 py-4 bg-slate-900 border border-slate-800 rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition shadow-inner text-base">
+            <button onclick="searchMusic()" class="absolute right-2 top-2 bottom-2 px-6 bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold rounded-xl transition text-sm flex items-center gap-2">
+                <i class="fa-solid fa-search"></i> Buscar
+            </button>
         </div>
 
-        <!-- Lista / Grelha de Músicas -->
+        <!-- Indicador de Carregamento -->
+        <div id="loadingIndicator" class="text-center py-10 hidden">
+            <i class="fa-solid fa-circle-notch fa-spin text-4xl text-emerald-400"></i>
+            <p class="text-slate-400 text-sm mt-3">A pesquisar músicas na internet...</p>
+        </div>
+
+        <!-- Lista de Resultados da Internet -->
         <section class="space-y-6">
             <div class="flex items-center justify-between">
-                <h2 class="text-2xl font-bold tracking-tight text-white">Músicas Disponíveis</h2>
-                <span class="text-xs text-slate-400" id="songCount">4 faixas</span>
+                <h2 class="text-2xl font-bold tracking-tight text-white" id="resultsTitle">Resultados da Pesquisa</h2>
+                <span class="text-xs text-slate-400" id="songCount">Digite algo acima para começar</span>
             </div>
 
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="musicGrid">
-                
-                <!-- Card 1 -->
-                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 space-y-4 hover:border-emerald-500/40 transition group">
-                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80" alt="Capa" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <button onclick="playMusic('Kizomba Love', 'T.AG Beatz', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')" class="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg hover:scale-110 transition">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white truncate">Kizomba Love</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">T.AG Beatz</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
-                        <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-semibold">Kizomba</span>
-                        <a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" download class="text-xs font-semibold text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-download"></i> Baixar
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 2 -->
-                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 space-y-4 hover:border-emerald-500/40 transition group">
-                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Capa" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <button onclick="playMusic('Afro Vibe 2026', 'Júnior Sound', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')" class="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg hover:scale-110 transition">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white truncate">Afro Vibe 2026</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Júnior Sound</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
-                        <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-semibold">Afrobeat</span>
-                        <a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" download class="text-xs font-semibold text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-download"></i> Baixar
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 space-y-4 hover:border-emerald-500/40 transition group">
-                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80" alt="Capa" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <button onclick="playMusic('Noite de Luau', 'T.AG & Friends', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')" class="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg hover:scale-110 transition">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white truncate">Noite de Luau</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">T.AG & Friends</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
-                        <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-semibold">Pop / Acústico</span>
-                        <a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3" download class="text-xs font-semibold text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-download"></i> Baixar
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="bg-slate-900 border border-slate-800/80 rounded-2xl p-4 space-y-4 hover:border-emerald-500/40 transition group">
-                    <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800">
-                        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" alt="Capa" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
-                        <button onclick="playMusic('Ritmo da Cidade', 'Tiago Luciano', 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3')" class="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg hover:scale-110 transition">
-                            <i class="fa-solid fa-play ml-0.5"></i>
-                        </button>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white truncate">Ritmo da Cidade</h3>
-                        <p class="text-xs text-slate-400 mt-0.5">Tiago Luciano</p>
-                    </div>
-                    <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
-                        <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-semibold">Dance</span>
-                        <a href="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3" download class="text-xs font-semibold text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition">
-                            <i class="fa-solid fa-download"></i> Baixar
-                        </a>
-                    </div>
-                </div>
-
+                <!-- As músicas pesquisadas aparecerão aqui automaticamente -->
             </div>
         </section>
     </main>
@@ -204,14 +133,14 @@
         </div>
     </div>
 
-    <!-- Elemento de Áudio HTML5 oculto -->
+    <!-- Elemento de Áudio HTML5 -->
     <audio id="mainAudioElement"></audio>
 
     <!-- Rodapé -->
     <footer class="bg-slate-950 border-t border-slate-800 py-10 mt-16">
         <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
             <p class="text-slate-400 text-xs">
-                T.AG Downloads Music © 2026 — Todos os direitos reservados.
+                T.AG Downloads Music © 2026 — Plataforma de Streaming Online.
             </p>
             <p class="text-emerald-400 text-sm font-bold tracking-wide">
                 Criado por Tiago José Luciano Júnior
@@ -219,8 +148,13 @@
         </div>
     </footer>
 
-    <!-- Scripts do Player e PWA -->
+    <!-- Scripts de Pesquisa Online e Player -->
     <script>
+        const searchInput = document.getElementById('searchInput');
+        const musicGrid = document.getElementById('musicGrid');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const songCount = document.getElementById('songCount');
+        
         const audioElement = document.getElementById('mainAudioElement');
         const playerBar = document.getElementById('audioPlayerBar');
         const playerTitle = document.getElementById('playerTitle');
@@ -228,6 +162,71 @@
         const playPauseIcon = document.getElementById('playPauseIcon');
 
         let isPlaying = false;
+
+        // Permitir pesquisar ao pressionar Enter
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                searchMusic();
+            }
+        });
+
+        // Função para buscar músicas na internet via API pública do Deezer
+        async function searchMusic() {
+            const query = searchInput.value.trim();
+            if (!query) return;
+
+            loadingIndicator.classList.remove('hidden');
+            musicGrid.innerHTML = '';
+
+            try {
+                // Usamos um proxy cors para consultar a API pública do Deezer de forma segura
+                const response = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(query)}&output=json`);
+                const data = await response.json();
+
+                loadingIndicator.classList.add('hidden');
+
+                if (data.data && data.data.length > 0) {
+                    songCount.innerText = `${data.data.length} músicas encontradas`;
+                    
+                    data.data.forEach(track => {
+                        const title = track.title;
+                        const artist = track.artist.name;
+                        const cover = track.album.cover_medium;
+                        const previewUrl = track.preview; // Link do áudio online
+
+                        const card = document.createElement('div');
+                        card.className = "bg-slate-900 border border-slate-800/80 rounded-2xl p-4 space-y-4 hover:border-emerald-500/40 transition group";
+                        
+                        card.innerHTML = `
+                            <div class="relative aspect-square rounded-xl overflow-hidden bg-slate-800">
+                                <img src="${cover}" alt="${title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <button onclick="playMusic('${title.replace(/'/g, "\\'")}', '${artist.replace(/'/g, "\\'")}', '${previewUrl}')" class="absolute bottom-3 right-3 w-12 h-12 rounded-full bg-emerald-500 text-slate-950 flex items-center justify-center text-lg shadow-lg hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-0.5"></i>
+                                </button>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white truncate">${title}</h3>
+                                <p class="text-xs text-slate-400 mt-0.5">${artist}</p>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
+                                <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-semibold">Online</span>
+                                <a href="${previewUrl}" download="${title} - ${artist}.mp3" target="_blank" class="text-xs font-semibold text-slate-300 hover:text-emerald-400 flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-download"></i> Baixar MP3
+                                </a>
+                            </div>
+                        `;
+                        musicGrid.appendChild(card);
+                    });
+                } else {
+                    songCount.innerText = "Nenhuma música encontrada";
+                    musicGrid.innerHTML = `<p class="text-slate-400 col-span-full text-center py-8">Nenhum resultado para "${query}". Tente outro artista ou estilo.</p>`;
+                }
+            } catch (error) {
+                loadingIndicator.classList.add('hidden');
+                console.error("Erro ao buscar músicas:", error);
+                musicGrid.innerHTML = `<p class="text-red-400 col-span-full text-center py-8">Erro ao conectar com a internet. Verifique sua conexão.</p>`;
+            }
+        }
 
         function playMusic(title, artist, url) {
             playerTitle.innerText = title;
@@ -251,7 +250,7 @@
             }
         }
 
-        // Registo do Service Worker para transformar em App
+        // Registo do Service Worker para PWA
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -262,3 +261,4 @@
     </script>
 </body>
 </html>
+
